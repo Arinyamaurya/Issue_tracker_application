@@ -59,13 +59,18 @@ const NewIssuePage = () => {
 
       // Redirect
       router.push("/issues");
-    } catch (err: any) {
-      if (err.response?.status === 400 && err.response.data?.errors) {
-        setServerErrors(err.response.data.errors);
-      } else {
-        setError("An unexpected error occurred.");
-      }
+    } 
+    catch (err) {
+  if (axios.isAxiosError(err)) {
+    if (err.response?.status === 400 && err.response.data?.errors) {
+      setServerErrors(err.response.data.errors);
+    } else {
+      setError("An unexpected error occurred.");
     }
+  } else {
+    setError("An unexpected error occurred.");
+  }
+}
   };
 
   return (
