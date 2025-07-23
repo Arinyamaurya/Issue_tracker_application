@@ -5,13 +5,14 @@ const prisma = new PrismaClient();
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+   context: { params: { id: string } }
 ) {
+  const { id } = context.params;
   const { status } = await request.json();
 
   try {
     const updatedIssue = await prisma.issue.update({
-      where: { id: parseInt(params.id) }, // 👈 Convert to number
+      where: { id: parseInt(id) },
       data: { status },
     });
 
