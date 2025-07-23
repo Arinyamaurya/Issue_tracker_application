@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
+import type { NextApiRequest } from "next";
+import type { NextRequest as AppNextRequest } from "next/server";
 
 const prisma = new PrismaClient();
 
 export async function PATCH(
-  request: NextRequest,
+  request: AppNextRequest,
   context: { params: { id: string } }
 ) {
   const { id } = context.params;
@@ -12,7 +14,7 @@ export async function PATCH(
 
   try {
     const updatedIssue = await prisma.issue.update({
-      where: { id: parseInt(id) }, // Make sure `id` is parsed as number if stored as int
+      where: { id: parseInt(id) },
       data: { status },
     });
 
