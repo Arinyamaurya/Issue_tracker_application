@@ -15,24 +15,30 @@ const NavBar = () => {
   ];
 
   return (
-    <nav className="flex space-x-6 border-b mb-5 px-5 h-14 items-center">
-      <Link href="/"><AiFillBug/></Link>
-      <ul className="flex space-x-6">
+    <nav className="flex space-x-10 border-b border-zinc-800 mb-5 px-5 h-15 items-center bg-[#000319] text-white">
+      <Link href="/">
+        <AiFillBug className="text-blue-500 text-3xl " />
+      </Link>
+     
+      <ul className="flex gap-5">
         {links.map((link) => (
           <li key={link.href}>
             <Link
               href={link.href}
-              className={classnames({
-                "text-zinc-900": link.href === currentPath,
-                "text-zinc-500": link.href !== currentPath,
-                "hover:text-zinc-800 transition-colors":true
-              })}
+              className={classnames(
+                "transition-colors hover:text-indigo-400",
+                {
+                  "text-white font-semibold": link.href === currentPath,
+                  "text-zinc-400": link.href !== currentPath,
+                }
+              )}
             >
               {link.label}
             </Link>
           </li>
         ))}
       </ul>
+      
     </nav>
   );
 };

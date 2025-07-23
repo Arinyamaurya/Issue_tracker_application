@@ -69,7 +69,8 @@ const NewIssuePage = () => {
   };
 
   return (
-    <div className="max-w-xl space-y-3">
+    <div className="bg-[#000319] w-full h-full p-10 flex justify-center items-center border rounded-2xl">
+    <div className="max-w-2xl w-full h-full space-y-3 bg-white p-5 flex justify-center items-center border rounded-xl">
       {error && (
         <Callout.Root color="red" className="mb-5">
           <Callout.Text>{error}</Callout.Text>
@@ -113,8 +114,9 @@ const NewIssuePage = () => {
           )}
         </div>
 
-        <Button type="submit">Submit Issue</Button>
+        <Button className="" type="submit">Submit Issue</Button>
       </form>
+    </div>
     </div>
   );
 };

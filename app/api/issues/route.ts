@@ -1,14 +1,25 @@
-import {NextRequest, NextResponse} from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { createIssueSchema } from "@/app/validationSchemas";
-import  {PrismaClient}  from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 
+const prisma = new PrismaClient();
 
-const prisma=new PrismaClient();
+export async function GET() {
+  try {
+    const issues = await prisma.issue.findMany({
+      orderBy: { createdAt: "desc" },
+    });
+    return NextResponse.json(issues);
+  } catch (error) {
+    return NextResponse.json({ message: "Failed to fetch issues" }, { status: 500 });
+  }
+}
 
-export async function POST(request:NextRequest){
-    const body = await request.json();
-    const validation=createIssueSchema.safeParse(body);
-    if (!validation.success) {
+export async function POST(request: NextRequest) {
+  const body = await request.json();
+  const validation = createIssueSchema.safeParse(body);
+  
+  if (!validation.success) {
     return NextResponse.json(
       { errors: validation.error.flatten().fieldErrors },
       { status: 400 }

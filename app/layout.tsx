@@ -23,10 +23,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="bg-[#000000] h-full">
       <body
-        className={inter.variable}>
-        <Theme accentColor="violet" radius="large">
+        className={`${inter.variable} h-full`}>
+        <Theme>
           <NavBar/>
           <main className="p-5  ">
         {children}
