@@ -3,9 +3,15 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+type Context = {
+  params: {
+    id: string;
+  };
+};
+
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: Context
 ) {
   const { id } = params;
   const { status } = await request.json();
