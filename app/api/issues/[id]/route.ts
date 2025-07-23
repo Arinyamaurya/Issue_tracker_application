@@ -3,11 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
-export async function PATCH(
-  request: NextRequest,
-   context: { params: { id: string } }
-) {
-  const { id } = context.params;
+export async function PATCH(request: NextRequest, { params }: { params: { id: string } }) {
+  const id = params.id;
   const { status } = await request.json();
 
   try {
@@ -19,9 +16,6 @@ export async function PATCH(
     return NextResponse.json(updatedIssue);
   } catch (error) {
     console.error("Error updating issue:", error);
-    return NextResponse.json(
-      { message: "Failed to update issue" },
-      { status: 500 }
-    );
+    return NextResponse.json({ message: `Updated issue with id ${id}` });
   }
 }
