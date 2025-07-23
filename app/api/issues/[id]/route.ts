@@ -1,13 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
-import type { NextApiRequest } from "next";
-import type { NextRequest as AppNextRequest } from "next/server";
 
 const prisma = new PrismaClient();
 
 export async function PATCH(
-  request: AppNextRequest,
-  context: { params: { id: string } }
+  request: NextRequest,
+  context: any // <--- TEMP FIX
 ) {
   const { id } = context.params;
   const { status } = await request.json();
