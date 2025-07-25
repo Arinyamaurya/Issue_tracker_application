@@ -10,7 +10,7 @@ export async function GET() {
       orderBy: { createdAt: "desc" },
     });
     return NextResponse.json(issues);
-  } catch (error) {
+  } catch {
     return NextResponse.json({ message: "Failed to fetch issues" }, { status: 500 });
   }
 }
@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
     });
 
     return NextResponse.json(newIssue, { status: 201 });
-  } catch (err) {
+  } catch{
     return NextResponse.json(
       { message: "Something went wrong" },
       { status: 500 }

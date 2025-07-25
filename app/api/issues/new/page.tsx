@@ -50,7 +50,7 @@ const NewIssuePage = () => {
     console.log("Form submitted:", data);
 
     try {
-      const res = await axios.post("/api/issues", data);
+       await axios.post("/api/issues", data);
 
       // Clear the form after successful submission
       setDescription("");

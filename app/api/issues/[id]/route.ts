@@ -5,9 +5,9 @@ const prisma = new PrismaClient();
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const { id } = params;
+  const { id } = await params;
   const { status } = await request.json();
 
   try {
@@ -16,9 +16,10 @@ export async function PATCH(
       data: { status },
     });
 
+
     return NextResponse.json(updatedIssue);
-  } catch (error) {
-    console.error("Error updating issue:", error);
+  } catch{
+    console.error("Error updating issue:");
     return NextResponse.json(
       { message: "Failed to update issue" },
       { status: 500 }
